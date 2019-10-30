@@ -1,3 +1,20 @@
+'''
+    For every loop we need to check each 16 bytes against the next set of 16 bytes
+    i=0:16 j=16:32
+    i=0:16 j=32:48
+    i=0:16 j=48:64
+    i=0:16 j=64:80
+    i=0:16 j=80:96
+    i=0:16 j=96:112
+    i=0:16 j=112:128
+    i=0:16 j=128:144
+    ...
+    i=16:32 j=32:48
+    i=16:32 j=48:64
+    i=16:32 j=64:80
+    ...
+'''
+
 def Check_ECB_Encrypted_Line(filename, block_size):
     with open(filename, 'r') as fp:
         line = fp.readline()
