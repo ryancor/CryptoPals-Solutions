@@ -13,6 +13,7 @@
     i=16:32 j=48:64
     i=16:32 j=64:80
     ...
+    if contents_of(i == j): then thats the encrypted line
 '''
 
 def Check_ECB_Encrypted_Line(filename, block_size):
