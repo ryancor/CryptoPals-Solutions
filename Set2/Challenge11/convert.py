@@ -1,5 +1,4 @@
 from random import randint
-from functools import reduce as rd
 from Crypto.Cipher import AES
 from Crypto.Cipher.AES import block_size
 from Crypto import Random
