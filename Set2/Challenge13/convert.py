@@ -7,26 +7,24 @@ class ECBEncrypt:
     def __init__(self):
         self._key = Random.new().read(AES.block_size)
 
+    def padPKCS7(x, k):
+        ch = k - (len(x) % k)
+        final = x + bytes([ch] * ch)
+        return final
+
+    def aes_ecb_encrypt_data(self, plaintext, key):
+        p_plaintext = ECBEncrypt.padPKCS7(plaintext, 16)
+        cipher = AES.new(key, AES.MODE_ECB)
+        return cipher.encrypt(p_plaintext)
+
     def encrypt_data(self, text):
         text = encode_json(profile_for(text))
         bytes_to_enc = text.encode()
-        return aes_ecb_encrypt_data(bytes_to_enc, self._key)
+        return self.aes_ecb_encrypt_data(bytes_to_enc, self._key)
 
     def decrypt_data(self, ciphertext):
         cipher = AES.new(self._key, AES.MODE_ECB)
         return cipher.decrypt(ciphertext)
-
-
-def padPKCS7(x, k):
-    ch = k - (len(x) % k)
-    final = x + bytes([ch] * ch)
-    return final
-
-
-def aes_ecb_encrypt_data(plaintext, key):
-    p_plaintext = padPKCS7(plaintext, 16)
-    cipher = AES.new(key, AES.MODE_ECB)
-    return cipher.encrypt(p_plaintext)
 
 
 def encode_json(obj):
